@@ -4,3 +4,4 @@ langchain_google_genai==2.0.4
 duckduckgo_search==6.3.4
 langgraph==0.2.48
 python-dotenv
+streamlit

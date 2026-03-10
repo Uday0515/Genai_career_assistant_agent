@@ -20,12 +20,17 @@ if not GOOGLE_API_KEY:
     raise ValueError("Please set GOOGLE_API_KEY in your .env file")
 
 
-llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
-    google_api_key=GOOGLE_API_KEY,
-    temperature=0.7,
-    verbose=True
-)
+def initialize_llm():
+    """Initialize the LLM - can be used by UI or CLI"""
+    return ChatGoogleGenerativeAI(
+        model="gemini-2.5-flash",
+        google_api_key=GOOGLE_API_KEY,
+        temperature=0.7,
+        verbose=True
+    )
+
+
+llm = initialize_llm()
 
 
 class AgentState(TypedDict):
@@ -391,6 +396,10 @@ def create_agent_graph():
 
 
 def run_career_assistant(user_query: str):
+    """
+    Main function to run the career assistant
+    Can be called from CLI or UI
+    """
     print(f"\n{'='*60}")
     print(f"🤖 GenAI Career Assistant")
     print(f"{'='*60}")
@@ -420,14 +429,14 @@ def run_career_assistant(user_query: str):
 if __name__ == "__main__":
     
     examples = [
-        "Create a tutorial on how to build a RAG system with LangChain",  
+        "Create a tutorial on how to build a RAG system with LangChain and langraph. and also its evaluation metrics",  
         "What's the difference between GPT-4 and Claude?",                
         "Help me write a resume for a GenAI engineer position",           
         "What are common interview questions for ML positions?",          
         "Give me a mock interview for a prompt engineer role",            
         "How do I find GenAI jobs at FAANG companies?"                    
     ]
-    query = examples[5]  
+    query = examples[0]  
     
     
     result = run_career_assistant(query)
