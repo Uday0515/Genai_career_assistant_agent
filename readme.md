@@ -134,6 +134,3 @@ That's what makes it an agent.
 ---
 
 Built while learning about AI agents and LangGraph. Feel free to fork and adapt for your use case.
-
-**Uday Kumar R**  
-[GitHub](https://github.com/Uday0515) • [LinkedIn](https://linkedin.com/in/yourprofile)
