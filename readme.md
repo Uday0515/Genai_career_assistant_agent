@@ -1,6 +1,7 @@
 # GenAI Career Assistant
 
 An AI agent that helps with career guidance in the GenAI field. I built this to understand how to structure agent workflows with LangGraph and integrate external tools like web search.
+![App Screenshot](assets/screenshot.png)
 
 ## What it does
 

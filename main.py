@@ -1,8 +1,3 @@
-"""
-GenAI Career Assistant 
-A multi-agent system for career guidance in Generative AI
-"""
-
 import os
 from typing import TypedDict
 from dotenv import load_dotenv
@@ -21,7 +16,6 @@ if not GOOGLE_API_KEY:
 
 
 def initialize_llm():
-    """Initialize the LLM - can be used by UI or CLI"""
     return ChatGoogleGenerativeAI(
         model="gemini-2.5-flash",
         google_api_key=GOOGLE_API_KEY,
@@ -62,7 +56,7 @@ def categorize_query(state: AgentState) -> AgentState:
     category = result.content.strip()
     
     state["category"] = category
-    print(f"📋 Category: {category}")
+    print(f"Category: {category}")
     
     return state
 
@@ -85,7 +79,7 @@ def sub_categorize_learning(state: AgentState) -> AgentState:
     sub_category = result.content.strip()
     
     state["sub_category"] = sub_category
-    print(f"📌 Sub-category: {sub_category}")
+    print(f"Sub-category: {sub_category}")
     
     return state
 
@@ -108,7 +102,7 @@ def sub_categorize_interview(state: AgentState) -> AgentState:
     sub_category = result.content.strip()
     
     state["sub_category"] = sub_category
-    print(f"📌 Sub-category: {sub_category}")
+    print(f"Sub-category: {sub_category}")
     
     return state
 
@@ -121,9 +115,9 @@ def web_search(state: AgentState) -> AgentState:
     try:
         search_results = search_tool.run(search_query)
         state["search_results"] = search_results
-        print(f"🔍 Web search completed")
+        print("Web search completed")
     except Exception as e:
-        print(f"⚠️ Search error: {e}")
+        print(f"Search error: {e}")
         state["search_results"] = "No search results available"
     
     return state
@@ -159,7 +153,7 @@ def generate_tutorial(state: AgentState) -> AgentState:
     })
     
     state["response"] = result.content
-    print(f"✅ Tutorial generated")
+    print("Tutorial generated")
     
     return state
 
@@ -191,7 +185,7 @@ def generate_qa_response(state: AgentState) -> AgentState:
     })
     
     state["response"] = result.content
-    print(f"✅ Q&A response generated")
+    print("Q&A response generated")
     
     return state
 
@@ -215,7 +209,7 @@ def generate_resume_assistance(state: AgentState) -> AgentState:
     result = chain.invoke({"query": query})
     
     state["response"] = result.content
-    print(f"✅ Resume guidance generated")
+    print("Resume guidance generated")
     
     return state
 
@@ -239,7 +233,7 @@ def generate_interview_prep(state: AgentState) -> AgentState:
     result = chain.invoke({"query": query})
     
     state["response"] = result.content
-    print(f"✅ Interview prep generated")
+    print("Interview prep generated")
     
     return state
 
@@ -262,7 +256,7 @@ def generate_mock_interview(state: AgentState) -> AgentState:
     result = chain.invoke({"query": query})
     
     state["response"] = result.content
-    print(f"✅ Mock interview generated")
+    print("Mock interview generated")
     
     return state
 
@@ -295,7 +289,7 @@ def generate_job_search_help(state: AgentState) -> AgentState:
     })
     
     state["response"] = result.content
-    print(f"✅ Job search guidance generated")
+    print("Job search guidance generated")
     
     return state
 
@@ -396,12 +390,8 @@ def create_agent_graph():
 
 
 def run_career_assistant(user_query: str):
-    """
-    Main function to run the career assistant
-    Can be called from CLI or UI
-    """
     print(f"\n{'='*60}")
-    print(f"🤖 GenAI Career Assistant")
+    print(f"GenAI Career Assistant")
     print(f"{'='*60}")
     print(f"Query: {user_query}\n")
     
@@ -418,7 +408,7 @@ def run_career_assistant(user_query: str):
     result = agent.invoke(initial_state)
     
     print(f"\n{'='*60}")
-    print(f"📊 Response:")
+    print(f"Response:")
     print(f"{'='*60}\n")
     print(result["response"])
     print(f"\n{'='*60}\n")
@@ -427,17 +417,15 @@ def run_career_assistant(user_query: str):
 
 
 if __name__ == "__main__":
-    
     examples = [
-        "Create a tutorial on how to build a RAG system with LangChain and langraph. and also its evaluation metrics",  
-        "What's the difference between GPT-4 and Claude?",                
-        "Help me write a resume for a GenAI engineer position",           
-        "What are common interview questions for ML positions?",          
-        "Give me a mock interview for a prompt engineer role",            
-        "How do I find GenAI jobs at FAANG companies?"                    
+        "Create a tutorial on how to build a RAG system with LangChain and langraph. and also its evaluation metrics",
+        "What's the difference between GPT-4 and Claude?",
+        "Help me write a resume for a GenAI engineer position",
+        "What are common interview questions for ML positions?",
+        "Give me a mock interview for a prompt engineer role",
+        "How do I find GenAI jobs at FAANG companies?"
     ]
-    query = examples[0]  
-    
+    query = examples[0]
     
     result = run_career_assistant(query)
     
@@ -461,4 +449,4 @@ if __name__ == "__main__":
     
     with open(filename, "w", encoding="utf-8") as f:
         f.write(result["response"])
-    print(f"📄 Output saved to {filename}")
+    print(f"Output saved to {filename}")
